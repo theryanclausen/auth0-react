@@ -6,3 +6,8 @@ ID = "testAuth0"
   base    = "./auth-app"
   publish = "./auth-app/build"
   command = "yarn build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
