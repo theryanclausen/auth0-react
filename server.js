@@ -13,7 +13,7 @@ const checkJwt = jwt({
     jwksUri: `https://ps-auth0.auth0.com/.well-known/jwks.json`
   }),
 
-  audience: "http://localhost:3001",
+  audience: "https://auth0test-test-test.herokuapp.com/",
   issuer: `https://ps-auth0.auth0.com/`,
 
   algorithms: ["RS256"]
@@ -37,7 +37,7 @@ app.get("/calendar", checkJwt,checkScope(['read:calendar']), (req, res) => {
 
 const checkRole= role =>{
     return (req, res, next) => {
-        const assignedRoles = req.user['http://localhost:3000/roles']
+        const assignedRoles = req.user['https://silly-allen-077c12.netlify.com/roles']
         if (Array.isArray(assignedRoles) && assignedRoles.includes(role)){
             return next()
         }else{
