@@ -13,8 +13,8 @@ const checkJwt = jwt({
     jwksUri: `https://ps-auth0.auth0.com/.well-known/jwks.json`
   }),
 
-  audience: "https://auth0test-test-test.herokuapp.com/",
-  issuer: `https://ps-auth0.auth0.com/`,
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: process.env.AUTH0_ISSUER,
 
   algorithms: ["RS256"]
 });
