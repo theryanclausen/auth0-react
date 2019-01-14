@@ -55,7 +55,7 @@ export default class Auth {
     localStorage.removeItem("expires_at");
     this.auth0.logout({
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
-      returnTo: "https://silly-allen-077c12.netlify.com"
+      returnTo: process.env.REACT_APP_ROOT
     });
   };
 

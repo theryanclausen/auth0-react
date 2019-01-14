@@ -37,7 +37,7 @@ app.get("/calendar", checkJwt,checkScope(['read:calendar']), (req, res) => {
 
 const checkRole= role =>{
     return (req, res, next) => {
-        const assignedRoles = req.user['https://silly-allen-077c12.netlify.com/roles']
+        const assignedRoles = req.user[`${process.env.REACT_APP_ROOT}/roles`]
         if (Array.isArray(assignedRoles) && assignedRoles.includes(role)){
             return next()
         }else{
