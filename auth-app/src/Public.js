@@ -6,7 +6,7 @@ class Public extends Component {
     message: ""
   };
   getMessage = async () => {
-    const response = await Axios.get("http://localhost:3001/public");
+    const response = await Axios.get("https://auth0test-test-test.herokuapp.com/public");
 
     try {
       this.setState({ message: response.data.message });

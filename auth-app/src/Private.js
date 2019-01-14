@@ -8,7 +8,7 @@ class Private extends Component {
   getMessage = async () => {
     try {
       
-      const response = await Axios.get("http://localhost:3001/private");
+      const response = await Axios.get("https://auth0test-test-test.herokuapp.com/private");
       this.setState({ message: response.data.message });
     } catch (err) {
       console.log(err);
@@ -19,7 +19,7 @@ class Private extends Component {
   adminCheck = async () =>{
     try {
       Axios.defaults.headers.common["Authorization"] =  `Bearer ${this.props.auth.getAccessToken()}`;
-      const response = await Axios.get("http://localhost:3001/admin");
+      const response = await Axios.get("https://auth0test-test-test.herokuapp.com/admin");
      return this.setState({ message: response.data.message });
     }catch(err){
       console.log(err)
