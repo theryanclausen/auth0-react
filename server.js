@@ -1,8 +1,9 @@
 const express = require("express");
-const port = 3001;
+const port = process.env.PORT || 3001;
 const cors = require("cors");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
+const checkScope = require("express-jwt-authz");
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
@@ -12,7 +13,7 @@ const checkJwt = jwt({
     jwksUri: `https://ps-auth0.auth0.com/.well-known/jwks.json`
   }),
 
-  audience: 'http://localhost:3001',
+  audience: "http://localhost:3001",
   issuer: `https://ps-auth0.auth0.com/`,
 
   algorithms: ["RS256"]
@@ -26,8 +27,28 @@ app.get("/public", (req, res) => {
   res.json({ message: "I am public on the server" });
 });
 
-app.get("/private",checkJwt, (req, res) => {
-    res.json({ message: "I am private on the server" });
+app.get("/private", checkJwt, (req, res) => {
+  res.json({ message: "I am private on the server" });
+});
+
+app.get("/calendar", checkJwt,checkScope(['read:calendar']), (req, res) => {
+  res.status(200).json({ events: [{id:1, event: 'Baseball game', date:'2019-01-22'},{id:2, event: 'Tap Dance Contest', date:'2019-01-23'}] });
+});
+
+const checkRole= role =>{
+    return (req, res, next) => {
+        const assignedRoles = req.user['http://localhost:3000/roles']
+        if (Array.isArray(assignedRoles) && assignedRoles.includes(role)){
+            return next()
+        }else{
+            return res.status(401).send('Insufficient role')
+        }
+    }
+}
+
+app.get("/admin", checkJwt,checkRole('admin'), (req, res) => {
+    res.json({ message: "You must have used google or else you wouldn't be seeing this" });
   });
+  
 
 app.listen(port, () => console.log(`${port} hears you`));

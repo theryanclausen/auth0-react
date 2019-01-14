@@ -7,10 +7,7 @@ class Private extends Component {
   };
   getMessage = async () => {
     try {
-      Axios.defaults.headers.common[
-        "Authorization"
-      ] = await `Bearer ${this.props.auth.getAccessToken()}`;
-
+      
       const response = await Axios.get("http://localhost:3001/private");
       this.setState({ message: response.data.message });
     } catch (err) {
@@ -18,8 +15,20 @@ class Private extends Component {
       this.setState({ message: 'Access denied' })
     }
   };
+
+  adminCheck = async () =>{
+    try {
+      Axios.defaults.headers.common["Authorization"] =  `Bearer ${this.props.auth.getAccessToken()}`;
+      const response = await Axios.get("http://localhost:3001/admin");
+     return this.setState({ message: response.data.message });
+    }catch(err){
+      console.log(err)
+      this.getMessage()
+    }
+  }
+
   componentDidMount() {
-    this.getMessage();
+    this.adminCheck();
   }
   render() {
     return (
