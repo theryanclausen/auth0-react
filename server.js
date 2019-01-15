@@ -74,6 +74,15 @@ app.get('/profile', async (req,res)=>{
   }
 })
 
+app.get('/family', async (req,res)=>{
+  try{
+    const profiles = await db('family')
+    return res.status(200).json(profiles)
+  }catch(err){
+    return res.json(err)
+  }
+})
+
 app.get("/profile/:email", async (req, res) => {
   const { email } = req.params;
   try {
