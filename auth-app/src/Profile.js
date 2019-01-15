@@ -28,6 +28,7 @@ class Profile extends Component {
           src={profile.picture}
           alt="profile pic"
         />
+        <p>{profile.email}</p>
         <pre>{JSON.stringify(profile, null, 2)}</pre>
       </>
     );

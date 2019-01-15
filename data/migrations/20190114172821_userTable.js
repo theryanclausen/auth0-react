@@ -13,3 +13,4 @@ exports.up = function(knex, Promise) {
     return knex.schema.dropTableIfExists('userTable')
   };
   
+  

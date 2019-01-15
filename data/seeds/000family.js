@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex("family").insert([
         {
-          name: "Sample",
+          family_name: "Sample",
         }
       ]);
     });

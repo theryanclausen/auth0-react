@@ -7,14 +7,15 @@ export class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test:'test'  ,
-      auth: new Auth(this.props.history)
+      auth: new Auth(this.props.history),
+      profile: {}
       
     };
   }
+  setApiProfile = (profile) => this.setState({profile})
   render() {
     return (
-      <authContext.Provider value={this.state}>
+      <authContext.Provider value={{...this.state, setApiProfile:this.setApiProfile}}>
         {this.props.children}
       </authContext.Provider>
     );
