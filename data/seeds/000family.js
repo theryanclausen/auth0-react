@@ -1,15 +1,12 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex("userTable")
+  return knex("family")
     .truncate()
     .then(function() {
       // Inserts seed entries
-      return knex("userTable").insert([
+      return knex("family").insert([
         {
-          name: "Bert Sample",
-          email:
-            "fake@email.com",
-          family_id:1
+          name: "Sample",
         }
       ]);
     });

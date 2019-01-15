@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
         tbl.string('email', 128).notNullable()
         tbl.string('test',125)
         tbl.boolean('isAdmin').defaultTo(false)
+        tbl.integer('family_id').references('family.id').notNullable()
     })
   };
   
