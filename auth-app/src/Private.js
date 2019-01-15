@@ -8,7 +8,7 @@ class Private extends Component {
   getMessage = async () => {
     try {
       
-      const response = await Axios.get(`${process.envREACT_APP_API_URL}private`);
+      const response = await Axios.get(`${process.env.REACT_APP_API_URL}/private`);
       this.setState({ message: response.data.message });
     } catch (err) {
       console.log(err);
